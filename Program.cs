@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 namespace EmployeeManager
 {
     class Program
     {
-        static void Main(string[] args)
+         static void Main(string[] args)
         {
-            // user input method calling
-            EmployeeUserInput.input();
-        
-           
-            //employee add
-
-            //employee deletE
-            //employee search
+            
+            var employee = new EmployeeMgtSys();
+            // employee user input method calling
+            EmployeeUserInput.input(employee);
 
         }
 

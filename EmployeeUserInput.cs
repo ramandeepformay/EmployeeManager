@@ -1,21 +1,23 @@
+using  System;
 namespace EmployeeManager
 {
     public class EmployeeUserInput
-    {
-        public static void input(){
+    {   
+           
+        public static void input(EmployeeMgtSys employee){
+             
             while(true){ 
-                // Intro to my employee Manager
+                // Employee Manager Inro
                 System.Console.WriteLine("Welcome to the Employee Manager");
                 System.Console.WriteLine("What would you like to do today? \n Enter s for search \n Enter a for Add \n Enter d for Delete \n Enter q for quit");
                 var userInput=System.Console.ReadLine().ToLower();
-
+                // options available to select
                 if(userInput=="s"){
-
-                   searchForEmployee();
+                   searchForEmployee(employee);
                 }
 
                 if(userInput=="a"){
-                    addEmployee();
+                    addEmployee(employee);
                 }
                 if(userInput=="d"){
                     System.Console.WriteLine("add");
@@ -26,8 +28,8 @@ namespace EmployeeManager
             }
 
         }
-        static void searchForEmployee(){
-            var employee = new EmployeeMgtSys();
+        static void searchForEmployee(EmployeeMgtSys employee){
+           
             System.Console.WriteLine("How would you like to search an employee today");
             System.Console.WriteLine("To search by firstname enter firstname\n");
             var nameSearchInput=System.Console.ReadLine().ToLower();
@@ -40,10 +42,25 @@ namespace EmployeeManager
                 System.Console.WriteLine($"{nameSearchInput} does exist in our directory");
             }
         }
-        static void addEmployee(){
-            var employee = new EmployeeMgtSys();
-            System.Console.WriteLine("Please add some details to add an employee in our directory");
-            
+        static void addEmployee(EmployeeMgtSys employee){
+            System.Console.WriteLine("\nPlease add some details to add an employee in our directory");
+            System.Console.WriteLine("Enter first Name\n");
+            var firstName = Console.ReadLine();
+            System.Console.WriteLine("Enter last Name\n");
+            var lastName = Console.ReadLine();
+            System.Console.WriteLine("Enter age\n");
+            var age = Convert.ToInt32(Console.ReadLine());
+            System.Console.WriteLine("Enter Designation\n");
+            var designation = Console.ReadLine();
+            System.Console.WriteLine("Enter Employee's Salary\n");
+            var salary =Convert.ToInt32(Console.ReadLine());
+            var employeeAdded=employee.addEmployee(firstName,lastName,age,designation,salary);
+            if(employeeAdded==null){
+                System.Console.WriteLine("Employee not added");
+            }
+            else{
+                System.Console.WriteLine($"{employeeAdded.FirstName} has been added");
+            }
         }
     }
 }
