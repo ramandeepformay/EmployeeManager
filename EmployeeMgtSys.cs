@@ -22,6 +22,20 @@ namespace EmployeeManager
             employeeInfo.Add(employee);
             return genericFinder(employeeInfo,firstName);
         }
+
+        public EmployeeInformation deleteEmployee(string name){
+            var findEmp=searchEmployee(name);
+           for(int i=0; i<employeeInfo.Count; i++){
+               if(findEmp.Id==employeeInfo[i].Id){
+                   var deleted=employeeInfo.Remove(employeeInfo[i]);
+                   if(deleted){
+                       return employeeInfo[i];
+                   }
+               }
+           }
+           return null;
+        }
+
         // generic function
         public EmployeeInformation genericFinder(List<EmployeeInformation> employee, string name){
             for(int i=0;i<employeeInfo.Count;i++){

@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using  System;
 namespace EmployeeManager
 {
@@ -15,12 +16,11 @@ namespace EmployeeManager
                 if(userInput=="s"){
                    searchForEmployee(employee);
                 }
-
                 if(userInput=="a"){
                     addEmployee(employee);
                 }
                 if(userInput=="d"){
-                    System.Console.WriteLine("add");
+                    deleteEmployee(employee);
                 }
                 if(userInput=="q"){
                     break;
@@ -29,20 +29,17 @@ namespace EmployeeManager
 
         }
         static void searchForEmployee(EmployeeMgtSys employee){
-           
+            //  welcome search func 
             System.Console.WriteLine("How would you like to search an employee today");
             System.Console.WriteLine("To search by firstname enter firstname\n");
             var nameSearchInput=System.Console.ReadLine().ToLower();
             var searchResult = employee.searchEmployee(nameSearchInput);
-        
-            if(searchResult==null){
-                System.Console.WriteLine($"{nameSearchInput} doesn't exist in our directory");
-            }
-            else{
-                System.Console.WriteLine($"{nameSearchInput} does exist in our directory");
-            }
+            // employee display
+            displayEmployee(searchResult,nameSearchInput,"founded");
+            
         }
         static void addEmployee(EmployeeMgtSys employee){
+            //  welcome add func 
             System.Console.WriteLine("\nPlease add some details to add an employee in our directory");
             System.Console.WriteLine("Enter first Name\n");
             var firstName = Console.ReadLine();
@@ -55,11 +52,26 @@ namespace EmployeeManager
             System.Console.WriteLine("Enter Employee's Salary\n");
             var salary =Convert.ToInt32(Console.ReadLine());
             var employeeAdded=employee.addEmployee(firstName,lastName,age,designation,salary);
-            if(employeeAdded==null){
-                System.Console.WriteLine("Employee not added");
+            // employee display
+            displayEmployee(employeeAdded,employeeAdded.FirstName,"added");
+        }
+
+        static void deleteEmployee(EmployeeMgtSys employee){
+            //  welcome del func 
+            System.Console.WriteLine("Enter the employees's first name that you want to delete?");
+            var userDelInput =Console.ReadLine().ToLower();
+            var delEmployee = employee.deleteEmployee(userDelInput);
+            // employee display
+            displayEmployee(delEmployee,userDelInput,"deleted");
+        }
+
+        // generic func
+        static void displayEmployee(EmployeeInformation result, string nameSearchInput, string msg){
+            if(result==null){
+                System.Console.WriteLine($"{nameSearchInput} has not been {msg} in our directory ");
             }
             else{
-                System.Console.WriteLine($"{employeeAdded.FirstName} has been added");
+                System.Console.WriteLine($"{nameSearchInput} has been {msg} in our directory");
             }
         }
     }
