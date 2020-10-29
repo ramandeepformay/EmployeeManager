@@ -13,16 +13,20 @@ namespace EmployeeManager
             employeeInfo.Add(employee2);
         }
         public List<EmployeeInformation> employeeInfo{ get; private set; }
+
+        // seacrch employee func
         public EmployeeInformation searchEmployee(string name){
             return genericFinder(employeeInfo,name);
               
         }
+        // Add Employee func
         public EmployeeInformation addEmployee(string firstName,string lastName,int age,string designation,int salary){
             var employee = new EmployeeInformation(firstName,lastName,age, designation,salary);
             employeeInfo.Add(employee);
             return genericFinder(employeeInfo,firstName);
         }
 
+        // delete employee func
         public EmployeeInformation deleteEmployee(string name){
             var findEmp=searchEmployee(name);
            for(int i=0; i<employeeInfo.Count; i++){
@@ -36,7 +40,26 @@ namespace EmployeeManager
            return null;
         }
 
-        // generic function
+        public int promoteEmployee(EmployeeInformation employee, string ans){
+            var oldRating =employee.Rating;
+            int newRating ;
+            if(ans=="pr"|| ans=="p"){
+                newRating=oldRating+1;
+                return newRating;
+            }
+            else{
+                if(oldRating>0){
+                    newRating=oldRating-1;
+                    return newRating;
+                }
+                else{
+                    return oldRating;
+                }
+               
+            }
+
+        }
+        // Generic finder to find en employee in the directory
         public EmployeeInformation genericFinder(List<EmployeeInformation> employee, string name){
             for(int i=0;i<employeeInfo.Count;i++){
                if(name== employeeInfo[i].FirstName.ToLower()){

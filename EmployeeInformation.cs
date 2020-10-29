@@ -11,6 +11,7 @@ namespace EmployeeManager
             Age = age;
             Designation = designation;
             Salary = salary;
+            Rating =0;
         } 
         public Guid Id { get; private set; }
         public string FirstName { get; private set; }
@@ -23,6 +24,7 @@ namespace EmployeeManager
         }
         public double Salary { get; private set; }
 
+        public int Rating { get; set;}
 
     }
 }
